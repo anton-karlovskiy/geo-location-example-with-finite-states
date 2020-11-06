@@ -9,24 +9,24 @@ function geoPositionReducer(state, action) {
       return {
         ...state,
         status: 'rejected',
-        error: action.error,
-      }
+        error: action.error
+      };
     }
     case 'success': {
       return {
         ...state,
         status: 'resolved',
-        position: action.position,
-      }
+        position: action.position
+      };
     }
     case 'started': {
       return {
         ...state,
-        status: 'pending',
-      }
+        status: 'pending'
+      };
     }
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`)
+      throw new Error(`Unhandled action type: ${action.type}`);
     }
   }
 }
@@ -35,33 +35,33 @@ function useGeoPosition() {
   const [state, dispatch] = React.useReducer(geoPositionReducer, {
     status: 'idle',
     position: null,
-    error: null,
-  })
+    error: null
+  });
 
   React.useEffect(() => {
     if (!navigator.geolocation) {
       dispatch({
         type: 'error',
-        error: new Error('Geolocation is not supported'),
-      })
-      return
+        error: new Error('Geolocation is not supported')
+      });
+      return;
     }
-    dispatch({type: 'started'})
+    dispatch({type: 'started'});
     const geoWatch = navigator.geolocation.watchPosition(
       position => dispatch({type: 'success', position}),
-      error => dispatch({type: 'error', error}),
-    )
-    return () => navigator.geolocation.clearWatch(geoWatch)
-  }, [])
+      error => dispatch({type: 'error', error})
+    );
+    return () => navigator.geolocation.clearWatch(geoWatch);
+  }, []);
 
-  return state
+  return state;
 }
 
 function YourPosition() {
-  const {status, position, error} = useGeoPosition()
+  const {status, position, error} = useGeoPosition();
 
   if (status === 'idle' || status === 'pending') {
-    return <div>Loading your position...</div>
+    return <div>Loading your position...</div>;
   }
 
   if (status === 'resolved') {
@@ -69,7 +69,7 @@ function YourPosition() {
       <div>
         Lat: {position.coords.latitude}, Long: {position.coords.longitude}
       </div>
-    )
+    );
   }
 
   if (status === 'rejected') {
@@ -78,8 +78,10 @@ function YourPosition() {
         <div>Oh no, there was a problem getting your position:</div>
         <pre>{error.message}</pre>
       </div>
-    )
+    );
   }
+
+  // could also use a switch or nested ternary if that's your jam..
 }
 
 function App() {
