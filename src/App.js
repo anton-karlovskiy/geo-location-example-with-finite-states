@@ -54,17 +54,24 @@ function useGeoPosition() {
     return () => navigator.geolocation.clearWatch(geoWatch);
   }, []);
 
-  return state;
+  return {
+    isLoading: state.status === 'idle' || state.status === 'pending',
+    isIdle: state.status === 'idle',
+    isPending: state.status === 'pending',
+    isResolved: state.status === 'resolved',
+    isRejected: state.status === 'rejected',
+    ...state
+  };
 }
 
 function YourPosition() {
-  const {status, position, error} = useGeoPosition();
+  const {position, error, isLoading, isResolved, isRejected} = useGeoPosition();
 
-  if (status === 'idle' || status === 'pending') {
+  if (isLoading) {
     return <div>Loading your position...</div>;
   }
 
-  if (status === 'resolved') {
+  if (isResolved) {
     return (
       <div>
         Lat: {position.coords.latitude}, Long: {position.coords.longitude}
@@ -72,7 +79,7 @@ function YourPosition() {
     );
   }
 
-  if (status === 'rejected') {
+  if (isRejected) {
     return (
       <div>
         <div>Oh no, there was a problem getting your position:</div>
