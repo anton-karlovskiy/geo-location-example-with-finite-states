@@ -72,7 +72,7 @@ function useGeoPosition() {
   return state;
 }
 
-function YourPositionByXstate() {
+function YourPositionWithXstateByKent() {
   const state = useGeoPosition();
 
   const status = state.value;
@@ -101,4 +101,4 @@ function YourPositionByXstate() {
   }
 }
 
-export default YourPositionByXstate;
+export default YourPositionWithXstateByKent;

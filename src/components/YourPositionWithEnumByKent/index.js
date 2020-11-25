@@ -62,7 +62,7 @@ function useGeoPosition() {
   };
 }
 
-function YourPositionByEnum() {
+function YourPositionWithEnumByKent() {
   const {position, error, isLoading, isResolved, isRejected} = useGeoPosition();
 
   if (isLoading) {
@@ -89,4 +89,4 @@ function YourPositionByEnum() {
   // could also use a switch or nested ternary if that's your jam..
 }
 
-export default YourPositionByEnum;
+export default YourPositionWithEnumByKent;

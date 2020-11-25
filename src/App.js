@@ -1,17 +1,17 @@
 
 import React from 'react';
 
-import YourPositionByEnum from 'components/YourPositionByEnum';
-import YourPositionByXstate from 'components/YourPositionByXstate';
+import YourPositionWithEnumByKent from 'components/YourPositionWithEnumByKent';
+import YourPositionWithXstateByKent from 'components/YourPositionWithXstateByKent';
 import './App.css';
 
 function App() {
   return (
     <div className='App'>
       <h2>Enum</h2>
-      <YourPositionByEnum />
+      <YourPositionWithEnumByKent />
       <h2>State machine</h2>
-      <YourPositionByXstate />
+      <YourPositionWithXstateByKent />
     </div>
   );
 }
